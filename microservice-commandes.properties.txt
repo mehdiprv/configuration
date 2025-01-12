@@ -1,0 +1,44 @@
+# Service Name and Port
+spring.application.name=microservice-commandes
+server.port=8080
+
+# Custom Properties
+mes-config-ms.commandes-last=1
+
+# H2 Console Configuration
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+# Actuator Configuration
+management.endpoints.web.exposure.include=refresh,env,health,info,routes
+management.endpoint.health.show-details=always
+management.endpoint.info.enabled=true
+management.endpoint.health.enabled=true
+
+# Application Metadata
+info.app.name=Microservice Commandes
+info.app.description=Service to manage commandes
+info.app.version=1.0.0
+
+# Eureka Client Configuration
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+
+# Resilience4j Circuit Breaker Configuration
+resilience4j.circuitbreaker.configs.default.registerHealthIndicator=true
+resilience4j.circuitbreaker.configs.default.slidingWindowSize=10
+resilience4j.circuitbreaker.configs.default.failureRateThreshold=50
+resilience4j.circuitbreaker.configs.default.waitDurationInOpenState=10s
+resilience4j.circuitbreaker.configs.default.permittedNumberOfCallsInHalfOpenState=5
+resilience4j.circuitbreaker.configs.default.slidingWindowType=COUNT_BASED
+resilience4j.circuitbreaker.configs.default.minimumNumberOfCalls=5
+resilience4j.circuitbreaker.configs.default.automaticTransitionFromOpenToHalfOpenEnabled=true
+
+# Logging for Resilience4j
+logging.level.io.github.resilience4j.circuitbreaker=DEBUG
+
+# Microservice-Produit Actuator Health Endpoint (Optional for Health Checks)
+# Add this if you want to explicitly document the Actuator health endpoint used for checks.
+microservice.produit.health.endpoint=http://microservice-produit/actuator/health
